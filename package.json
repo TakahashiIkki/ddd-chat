@@ -1,0 +1,8 @@
+{
+  "name": "ddd-chat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:TakahashiIkki/ddd-chat.git",
+  "author": "ikkitang <new_ittyandesu@outlook.jp>",
+  "license": "MIT"
+}
