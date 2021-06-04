@@ -1,4 +1,8 @@
 import express from 'express';
+import {ShowSelfUserAction} from "./Http/Controllers/User/ShowSelfUserAction";
+import {ShowSelfUserResponder} from "./Http/Responders/User/ShowSelfUserResponder";
+import {GetSelfUser} from "../Domain/User/UseCase/GetSelfUser";
+import {UserRepository} from "../Domain/User/Repository/UserRepository";
 
 export class ChatApp {
     readonly env: typeof process.env;
@@ -19,21 +23,11 @@ export class ChatApp {
     async buildServer() {
         const app: express.Express = express()
 
-        type User = {
-            id: number
-            name: string
-            email: string
-        };
-
-        const users: User[] = [
-            {id: 1, name: "User1", email: "user1@test.local"},
-            {id: 2, name: "User2", email: "user2@test.local"},
-            {id: 3, name: "User3", email: "user3@test.local"}
-        ]
+        const action = new ShowSelfUserAction(new GetSelfUser(new UserRepository()), new ShowSelfUserResponder);
 
         //一覧取得
         app.get('/users', (req: express.Request, res: express.Response) => {
-            res.send(JSON.stringify(users))
+            action.__invoke(req, res);
         })
 
         //CROS対応（というか完全無防備：本番環境ではだめ絶対）

@@ -4,12 +4,11 @@ export type UserPropsType = {
 };
 
 export class User {
-    private readonly id: string;
-    private userName: string;
-
-    constructor(id: string, userName: string) {
-        this.id = id
-        this.userName = userName
+    constructor(
+        private readonly id: string,
+        private userName: string,
+        private email: string
+    ) {
     }
 
     getUserId(): string {
@@ -22,5 +21,13 @@ export class User {
 
     setUserName(newName: string) {
         this.userName = newName;
+    }
+
+    getEmail(): string {
+        return this.email;
+    }
+
+    setEmail(): string {
+        return this.email;
     }
 }

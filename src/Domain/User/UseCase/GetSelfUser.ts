@@ -8,11 +8,7 @@ export class GetSelfUser {
         this.userRepository = userRepository;
     }
 
-    run(userId: string): User {
-        const user = this.userRepository.findById(userId);
-        if (!user) {
-            throw new Error('ユーザーが見つかりませんでした。ログインを行ってください。')
-        }
-        return user;
+    run(userId: string): User | undefined {
+        return this.userRepository.findById(userId);
     }
 }
